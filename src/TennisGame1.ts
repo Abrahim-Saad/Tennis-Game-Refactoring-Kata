@@ -21,33 +21,12 @@ export class TennisGame1 implements TennisGame {
 
   getScore(): string {
     let score: string = '';
-    let tempScore: number = 0;
-    if (this.m_score1 === this.m_score2) {
-      score = this.calculateScoreWhenBothScoresAreEqual(this.m_score1, score);
-    }
-    else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-      score = this.calculateScoreWhenOneScoreIsAtLeast4(this.m_score1, this.m_score2, score);
-    }
-    else {
-      for (let i = 1; i < 3; i++) {
-        if (i === 1) tempScore = this.m_score1;
-        else { score += '-'; tempScore = this.m_score2; }
-        switch (tempScore) {
-          case 0:
-            score += 'Love';
-            break;
-          case 1:
-            score += 'Fifteen';
-            break;
-          case 2:
-            score += 'Thirty';
-            break;
-          case 3:
-            score += 'Forty';
-            break;
-        }
-      }
-    }
+    if (this.m_score1 === this.m_score2) score = this.calculateScoreWhenBothScoresAreEqual(this.m_score1, score);
+
+    else if (this.m_score1 >= 4 || this.m_score2 >= 4) score = this.calculateScoreWhenOneScoreIsAtLeast4(this.m_score1, this.m_score2, score);
+
+    else score = this.calculateScore(this.m_score1, this.m_score2, score);
+
     return score;
   }
 
@@ -78,6 +57,30 @@ export class TennisGame1 implements TennisGame {
     else if (minusResult === -1) score = 'Advantage player2';
     else if (minusResult >= 2) score = 'Win for player1';
     else score = 'Win for player2';
+    return score;
+  }
+
+
+  calculateScore(m_score1: number, m_score2: number, score: string): string {
+    let tempScore: number = 0;
+    for (let i = 1; i < 3; i++) {
+      if (i === 1) tempScore = m_score1;
+      else { score += '-'; tempScore = m_score2; }
+      switch (tempScore) {
+        case 0:
+          score += 'Love';
+          break;
+        case 1:
+          score += 'Fifteen';
+          break;
+        case 2:
+          score += 'Thirty';
+          break;
+        case 3:
+          score += 'Forty';
+          break;
+      }
+    }
     return score;
   }
 }
