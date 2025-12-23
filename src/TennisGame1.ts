@@ -28,17 +28,17 @@ export class TennisGame1 implements TennisGame {
   calculateScore(m_score1: number, m_score2: number): string {
     let score: string = '';
     let tempScore: number = 0;
+    const players = [{ FIRST_PLAYER: 1 }, { SECOND_PLAYER: 2 }];
 
     if (this.bothScoresAreEqual(m_score1, m_score2)) return this.calculateScoreWhenBothScoresAreEqual(m_score1);
 
     if (this.oneScoreIsAtLeast4(m_score1, m_score2)) return this.calculateScoreWhenOneScoreIsAtLeast4(m_score1, m_score2);
 
-    for (let i = 1; i < 3; i++) {
-      if (i === 1) tempScore = m_score1;
+    players.forEach((player) => {
+      if (player.FIRST_PLAYER) tempScore = m_score1;
       else { score += '-'; tempScore = m_score2; }
       score += this.mapTempScoreToTerm(tempScore);
-    }
-
+    });
     return score;
   }
 
