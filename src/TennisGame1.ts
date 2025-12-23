@@ -23,14 +23,10 @@ export class TennisGame1 implements TennisGame {
     let score: string = '';
     let tempScore: number = 0;
     if (this.m_score1 === this.m_score2) {
-      score = this.calculateScoreWhenScore1EqualsScore2(this.m_score1, score);
+      score = this.calculateScoreWhenBothScoresAreEqual(this.m_score1, score);
     }
     else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
-      const minusResult: number = this.m_score1 - this.m_score2;
-      if (minusResult === 1) score = 'Advantage player1';
-      else if (minusResult === -1) score = 'Advantage player2';
-      else if (minusResult >= 2) score = 'Win for player1';
-      else score = 'Win for player2';
+      score = this.calculateScoreWhenOneScoreIsAtLeast4(this.m_score1, this.m_score2, score);
     }
     else {
       for (let i = 1; i < 3; i++) {
@@ -56,7 +52,7 @@ export class TennisGame1 implements TennisGame {
   }
 
 
-  calculateScoreWhenScore1EqualsScore2(m_score: number, score: string): string {
+  calculateScoreWhenBothScoresAreEqual(m_score: number, score: string): string {
     switch (m_score) {
       case 0:
         score = 'Love-All';
@@ -72,6 +68,16 @@ export class TennisGame1 implements TennisGame {
         break;
 
     }
+    return score;
+  }
+
+
+  calculateScoreWhenOneScoreIsAtLeast4(m_score1: number, m_score2: number, score: string): string {
+    const minusResult: number = m_score1 - m_score2;
+    if (minusResult === 1) score = 'Advantage player1';
+    else if (minusResult === -1) score = 'Advantage player2';
+    else if (minusResult >= 2) score = 'Win for player1';
+    else score = 'Win for player2';
     return score;
   }
 }
