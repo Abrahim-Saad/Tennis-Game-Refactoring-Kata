@@ -28,11 +28,11 @@ export class TennisGame1 implements TennisGame {
   calculateScore(m_score1: number, m_score2: number): string {
     let score: string = '';
     let tempScore: number = 0;
-    
-    if (this.bothScoresAreEqual(m_score1, m_score2)) return this.calculateScoreWhenBothScoresAreEqual(m_score1, score);
 
-    if (this.oneScoreIsAtLeast4(m_score1, m_score2)) return this.calculateScoreWhenOneScoreIsAtLeast4(m_score1, m_score2, score);
-    
+    if (this.bothScoresAreEqual(m_score1, m_score2)) return this.calculateScoreWhenBothScoresAreEqual(m_score1);
+
+    if (this.oneScoreIsAtLeast4(m_score1, m_score2)) return this.calculateScoreWhenOneScoreIsAtLeast4(m_score1, m_score2);
+
     for (let i = 1; i < 3; i++) {
       if (i === 1) tempScore = m_score1;
       else { score += '-'; tempScore = m_score2; }
@@ -66,21 +66,19 @@ export class TennisGame1 implements TennisGame {
   }
 
 
-  calculateScoreWhenBothScoresAreEqual(m_score: number, score: string): string {
+  calculateScoreWhenBothScoresAreEqual(m_score: number): string {
     let scoreTerm = this.mapScoreToTerm(m_score);
     if (!scoreTerm) scoreTerm = ScoreEnums.DEUCE;
-    score = scoreTerm;
-    return score;
+    return scoreTerm;
   }
 
 
-  calculateScoreWhenOneScoreIsAtLeast4(m_score1: number, m_score2: number, score: string): string {
+  calculateScoreWhenOneScoreIsAtLeast4(m_score1: number, m_score2: number): string {
     const minusResult: number = m_score1 - m_score2;
-    if (minusResult === 1) score = ScoreEnums.ADVANTAGE_PLAYER1;
-    else if (minusResult === -1) score = ScoreEnums.ADVANTAGE_PLAYER2;
-    else if (minusResult >= 2) score = ScoreEnums.WIN_FOR_PLAYER1;
-    else score = ScoreEnums.WIN_FOR_PLAYER2;
-    return score;
+    if (minusResult === 1) return ScoreEnums.ADVANTAGE_PLAYER1;
+    if (minusResult === -1) return ScoreEnums.ADVANTAGE_PLAYER2;
+    if (minusResult >= 2) return ScoreEnums.WIN_FOR_PLAYER1;
+    return ScoreEnums.WIN_FOR_PLAYER2;
   }
 
 
