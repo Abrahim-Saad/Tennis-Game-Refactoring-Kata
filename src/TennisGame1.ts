@@ -22,9 +22,9 @@ export class TennisGame1 implements TennisGame {
   getScore(): string {
     let score: string = '';
     let tempScore: number = 0;
-      if (this.m_score1 === this.m_score2) {
-        score = this.calculateScoreWhenScore1EqualsScore2(this.m_score1, score);
-      }
+    if (this.m_score1 === this.m_score2) {
+      score = this.calculateScoreWhenScore1EqualsScore2(this.m_score1, score);
+    }
     else if (this.m_score1 >= 4 || this.m_score2 >= 4) {
       const minusResult: number = this.m_score1 - this.m_score2;
       if (minusResult === 1) score = 'Advantage player1';
