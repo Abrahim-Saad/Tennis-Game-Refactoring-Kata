@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "test": "jest",
+    "test-game1": "jest -t TennisGame1",
     "build": "tsc",
     "test:coverage": "jest --coverage"
   },
