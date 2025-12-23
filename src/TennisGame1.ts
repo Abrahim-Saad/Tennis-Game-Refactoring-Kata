@@ -36,20 +36,7 @@ export class TennisGame1 implements TennisGame {
     for (let i = 1; i < 3; i++) {
       if (i === 1) tempScore = m_score1;
       else { score += '-'; tempScore = m_score2; }
-      switch (tempScore) {
-        case 0:
-          score += 'Love';
-          break;
-        case 1:
-          score += 'Fifteen';
-          break;
-        case 2:
-          score += 'Thirty';
-          break;
-        case 3:
-          score += 'Forty';
-          break;
-      }
+      score += this.mapTempScoreToTerm(tempScore);
     }
 
     return score;
@@ -67,7 +54,7 @@ export class TennisGame1 implements TennisGame {
 
 
   calculateScoreWhenBothScoresAreEqual(m_score: number): string {
-    let scoreTerm = this.mapScoreToTerm(m_score);
+    let scoreTerm = this.mapScoreToTermWhenBothScoresAreEqual(m_score);
     if (!scoreTerm) scoreTerm = ScoreEnums.DEUCE;
     return scoreTerm;
   }
@@ -82,7 +69,7 @@ export class TennisGame1 implements TennisGame {
   }
 
 
-  mapScoreToTerm(score: number): string {
+  mapScoreToTermWhenBothScoresAreEqual(score: number): string {
     const scoreTerms: { [scoreValue: number]: string } = {
       0: ScoreEnums.LOVE_ALL,
       1: ScoreEnums.FIFTEEN_ALL,
@@ -90,5 +77,16 @@ export class TennisGame1 implements TennisGame {
       3: ScoreEnums.DEUCE
     };
     return scoreTerms[score];
+  }
+
+
+  mapTempScoreToTerm(tempScore: number): string {
+    const scoreTerms: { [scoreValue: number]: string } = {
+      0: ScoreEnums.LOVE,
+      1: ScoreEnums.FIFTEEN,
+      2: ScoreEnums.THIRTY,
+      3: ScoreEnums.FORTY
+    };
+    return scoreTerms[tempScore];
   }
 }
