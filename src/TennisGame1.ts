@@ -67,21 +67,9 @@ export class TennisGame1 implements TennisGame {
 
 
   calculateScoreWhenBothScoresAreEqual(m_score: number, score: string): string {
-    switch (m_score) {
-      case 0:
-        score = ScoreEnums.LOVE_ALL;
-        break;
-      case 1:
-        score = ScoreEnums.FIFTEEN_ALL;
-        break;
-      case 2:
-        score = ScoreEnums.THIRTY_ALL;
-        break;
-      default:
-        score = ScoreEnums.DEUCE;
-        break;
-
-    }
+    let scoreTerm = this.mapScoreToTerm(m_score);
+    if (!scoreTerm) scoreTerm = ScoreEnums.DEUCE;
+    score = scoreTerm;
     return score;
   }
 
@@ -96,4 +84,13 @@ export class TennisGame1 implements TennisGame {
   }
 
 
+  mapScoreToTerm(score: number): string {
+    const scoreTerms: { [scoreValue: number]: string } = {
+      0: ScoreEnums.LOVE_ALL,
+      1: ScoreEnums.FIFTEEN_ALL,
+      2: ScoreEnums.THIRTY_ALL,
+      3: ScoreEnums.DEUCE
+    };
+    return scoreTerms[score];
+  }
 }
