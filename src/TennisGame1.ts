@@ -12,6 +12,7 @@ export class TennisGame1 implements TennisGame {
     this.player2Name = player2Name;
   }
 
+
   wonPoint(playerName: string): void {
     const player1: string = 'player1';
     if (playerName === player1)
@@ -20,6 +21,7 @@ export class TennisGame1 implements TennisGame {
       this.m_score2 += 1;
   }
 
+  
   getScore(): string {
     return this.calculateScore(this.m_score1, this.m_score2);
   }
