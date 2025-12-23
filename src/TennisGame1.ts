@@ -1,4 +1,5 @@
 import { TennisGame } from './TennisGame';
+import { ScoreEnums } from './ScoreEnums';
 
 export class TennisGame1 implements TennisGame {
   private m_score1: number = 0;
@@ -68,16 +69,16 @@ export class TennisGame1 implements TennisGame {
   calculateScoreWhenBothScoresAreEqual(m_score: number, score: string): string {
     switch (m_score) {
       case 0:
-        score = 'Love-All';
+        score = ScoreEnums.LOVE_ALL;
         break;
       case 1:
-        score = 'Fifteen-All';
+        score = ScoreEnums.FIFTEEN_ALL;
         break;
       case 2:
-        score = 'Thirty-All';
+        score = ScoreEnums.THIRTY_ALL;
         break;
       default:
-        score = 'Deuce';
+        score = ScoreEnums.DEUCE;
         break;
 
     }
@@ -93,5 +94,6 @@ export class TennisGame1 implements TennisGame {
     else score = 'Win for player2';
     return score;
   }
+
 
 }
