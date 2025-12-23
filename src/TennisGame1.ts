@@ -20,14 +20,7 @@ export class TennisGame1 implements TennisGame {
   }
 
   getScore(): string {
-    let score: string = '';
-    if (this.m_score1 === this.m_score2) score = this.calculateScoreWhenBothScoresAreEqual(this.m_score1, score);
-
-    else if (this.m_score1 >= 4 || this.m_score2 >= 4) score = this.calculateScoreWhenOneScoreIsAtLeast4(this.m_score1, this.m_score2, score);
-
-    else score = this.calculateScore(this.m_score1, this.m_score2, score);
-
-    return score;
+    return this.calculateScore(this.m_score1, this.m_score2);
   }
 
 
@@ -61,8 +54,14 @@ export class TennisGame1 implements TennisGame {
   }
 
 
-  calculateScore(m_score1: number, m_score2: number, score: string): string {
+  calculateScore(m_score1: number, m_score2: number): string {
+    let score: string = '';
     let tempScore: number = 0;
+    
+    if (this.m_score1 === this.m_score2) return this.calculateScoreWhenBothScoresAreEqual(this.m_score1, score);
+
+    if (this.m_score1 >= 4 || this.m_score2 >= 4) return this.calculateScoreWhenOneScoreIsAtLeast4(this.m_score1, this.m_score2, score);
+    
     for (let i = 1; i < 3; i++) {
       if (i === 1) tempScore = m_score1;
       else { score += '-'; tempScore = m_score2; }
@@ -81,6 +80,7 @@ export class TennisGame1 implements TennisGame {
           break;
       }
     }
+
     return score;
   }
 }
