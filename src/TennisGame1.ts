@@ -88,10 +88,10 @@ export class TennisGame1 implements TennisGame {
 
   calculateScoreWhenOneScoreIsAtLeast4(m_score1: number, m_score2: number, score: string): string {
     const minusResult: number = m_score1 - m_score2;
-    if (minusResult === 1) score = 'Advantage player1';
-    else if (minusResult === -1) score = 'Advantage player2';
-    else if (minusResult >= 2) score = 'Win for player1';
-    else score = 'Win for player2';
+    if (minusResult === 1) score = ScoreEnums.ADVANTAGE_PLAYER1;
+    else if (minusResult === -1) score = ScoreEnums.ADVANTAGE_PLAYER2;
+    else if (minusResult >= 2) score = ScoreEnums.WIN_FOR_PLAYER1;
+    else score = ScoreEnums.WIN_FOR_PLAYER2;
     return score;
   }
 
